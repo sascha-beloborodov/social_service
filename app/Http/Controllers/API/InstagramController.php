@@ -15,7 +15,7 @@ class InstagramController extends AppBaseController
 	/**
 	 * Sends message to user.
 	 * Notice!
-	 * If user did not approve - hi doesn't see a message
+	 * If user did not approve - he doesn't see a message
 	 *
 	 * @param InstagramSendDirectMessage $request
 	 *
@@ -44,7 +44,7 @@ class InstagramController extends AppBaseController
 	/**
 	 * Sends image to user.
 	 * Notice! Also as 'sendText' -
-	 * If user did not approve - hi doesn't see a message
+	 * If user did not approve - he doesn't see a message
 	 *
 	 * @param InstagramSendDirectImage $request
 	 *

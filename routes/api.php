@@ -1,5 +1,6 @@
 <?php
 
+use ATehnix\VkClient\Client;
 use Illuminate\Http\Request;
 
 /*
@@ -32,13 +33,45 @@ Route::prefix('instagram')
 
 Route::prefix('vk')
      ->middleware(\App\Http\Middleware\CheckHeader::class)
+	 ->middleware(\App\Http\Middleware\VKAuthorize::class)
      ->group(function () {
 
-     Route::prefix('messages')->group(function () {
+     Route::prefix('users')->group(function () {
 
-	     Route::post('send', 'InstagramController@sendMessage');
+	     Route::post('getById', 'VKController@getUsersById');
 
      });
+
+     // Only for standalone
+     Route::prefix('messages')->group(function () {
+
+	     Route::post('get', 'VKController@getMessages');
+	     Route::post('text', 'VKController@sendMessage');
+	     Route::post('history', 'VKController@getHistoryMessages');
+	     Route::post('dialogs', 'VKController@getDialogs');
+
+     });
+
+     Route::prefix('groups')->group(function () {
+
+	     Route::post('getOneById', 'VKController@getGroupById');
+	     Route::post('/', 'VKController@getGroups');
+
+     });
+
+     Route::prefix('friends')->group(function () {
+
+	     Route::post('/', 'VKController@getFriends');
+
+     });
+
+
+     Route::prefix('likes')->group(function () {
+
+	     Route::post('/', 'VKController@getFriends');
+
+     });
+
 });
 
 

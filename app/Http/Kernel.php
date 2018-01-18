@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'checkHeader' => \App\Http\Middleware\CheckHeader::class,
         'instagramAuthorize' => \App\Http\Middleware\InstagramAuthorize::class,
+        'vkAuthorize' => \App\Http\Middleware\VKAuthorize::class,
     ];
 }

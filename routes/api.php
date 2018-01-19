@@ -38,38 +38,52 @@ Route::prefix('vk')
 
      Route::prefix('users')->group(function () {
 
-	     Route::post('getById', 'VKController@getUsersById');
+	     Route::get('getById', 'VKController@getUsersById');
 
      });
 
      // Only for standalone
      Route::prefix('messages')->group(function () {
 
-	     Route::post('get', 'VKController@getMessages');
+	     Route::get('get', 'VKController@getMessages');
 	     Route::post('text', 'VKController@sendMessage');
-	     Route::post('history', 'VKController@getHistoryMessages');
-	     Route::post('dialogs', 'VKController@getDialogs');
+	     Route::get('history', 'VKController@getHistoryMessages');
+	     Route::get('dialogs', 'VKController@getDialogs');
 
      });
 
      Route::prefix('groups')->group(function () {
 
-	     Route::post('getOneById', 'VKController@getGroupById');
-	     Route::post('/', 'VKController@getGroups');
+	     Route::get('getOneById', 'VKController@getGroupById');
+	     Route::get('/', 'VKController@getGroups');
 
      });
 
      Route::prefix('friends')->group(function () {
 
-	     Route::post('/', 'VKController@getFriends');
+	     Route::get('/', 'VKController@getFriends');
 
      });
 
 
      Route::prefix('likes')->group(function () {
 
-	     Route::post('/', 'VKController@getFriends');
+	     Route::post('/to', 'VKController@toLikeById');
 
+     });
+
+
+     Route::prefix('posts')->group(function () {
+
+	     Route::get('one', 'VKController@getOnePost');
+	     Route::get('/', 'VKController@getPosts');
+	     Route::post('create', 'VKController@createPost');
+	     Route::put('edit', 'VKController@editPost');
+	     Route::delete('delete', 'VKController@deletePost');
+	     Route::get('comments', 'VKController@getComments');
+	     Route::post('comments/create', 'VKController@createPostComment');
+	     Route::put('comments', 'VKController@editPostComment');
+	     Route::delete('comments', 'VKController@deletePostComment');
      });
 
 });

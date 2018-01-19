@@ -16,7 +16,7 @@ class VKAuthorize
      */
     public function handle($request, Closure $next)
     {
-	    $token = $request->header('VK_ACCESS_TOKEN');
+	    $token = $request->header('vk-access-token');
 
 	    if (!$token) {
 		    return response()->json([

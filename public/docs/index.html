@@ -52,11 +52,11 @@
 <!-- START_5c0e5fd96d6d16d858ac71290615a481 -->
 <h2>Sends message to user.</h2>
 <p>Notice!
-If user did not approve - hi doesn't see a message</p>
+If user did not approve - he doesn't see a message</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://abebot.tk//api/instagram/messages/text" \
+<pre><code class="language-bash">curl -X POST "http://localhost/api/instagram/messages/text" \
 -H "Accept: application/json" \
     -d "user_id"="885653200" \
     -d "message"="velit" \
@@ -64,7 +64,7 @@ If user did not approve - hi doesn't see a message</p>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://abebot.tk//api/instagram/messages/text",
+    "url": "http://localhost/api/instagram/messages/text",
     "method": "POST",
     "data": {
         "user_id": 885653200,
@@ -109,11 +109,11 @@ $.ajax(settings).done(function (response) {
 <!-- START_4f44439e444bf7c480463e75c50d0c9e -->
 <h2>Sends image to user.</h2>
 <p>Notice! Also as 'sendText' -
-If user did not approve - hi doesn't see a message</p>
+If user did not approve - he doesn't see a message</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://abebot.tk//api/instagram/messages/image" \
+<pre><code class="language-bash">curl -X POST "http://localhost/api/instagram/messages/image" \
 -H "Accept: application/json" \
     -d "user_id"="351763623" \
     -d "image"="neque" \
@@ -121,7 +121,7 @@ If user did not approve - hi doesn't see a message</p>
 <pre><code class="language-javascript">var settings = {
     "async": true,
     "crossDomain": true,
-    "url": "http://abebot.tk//api/instagram/messages/image",
+    "url": "http://localhost/api/instagram/messages/image",
     "method": "POST",
     "data": {
         "user_id": 351763623,
@@ -163,6 +163,1237 @@ $.ajax(settings).done(function (response) {
 </tbody>
 </table>
 <!-- END_4f44439e444bf7c480463e75c50d0c9e -->
+<!-- START_8e25693341dd79962cce6246be6e6b5d -->
+<h2>Get threads of a current user. &lt;br&gt;</h2>
+<p>Pending threads will approve automatically</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/instagram/messages/threads" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/instagram/messages/threads",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Bad credentials: You must provide a username and password to login()."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/instagram/messages/threads</code></p>
+<p><code>HEAD api/instagram/messages/threads</code></p>
+<!-- END_8e25693341dd79962cce6246be6e6b5d -->
+<!-- START_2544763eb9ce558e2b09c9b60dc70cb6 -->
+<h2>Get history of all threads (all users). &lt;br&gt;</h2>
+<p>TODO: make separate methods - getHistoryByThread and getHistoryByUserId</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/instagram/messages/history" \
+-H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/instagram/messages/history",
+    "method": "GET",
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Bad credentials: You must provide a username and password to login()."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/instagram/messages/history</code></p>
+<p><code>HEAD api/instagram/messages/history</code></p>
+<!-- END_2544763eb9ce558e2b09c9b60dc70cb6 -->
+<!-- START_32deab1ce932b3953a68ce535df8e64d -->
+<h2>api/vk/users/getById</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/users/getById" \
+-H "Accept: application/json" \
+    -d "user_ids"="facilis" \
+    -d "fields"="facilis" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/users/getById",
+    "method": "GET",
+    "data": {
+        "user_ids": "facilis",
+        "fields": "facilis"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/users/getById</code></p>
+<p><code>HEAD api/vk/users/getById</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_ids</td>
+<td>string</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>fields</td>
+<td>string</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_32deab1ce932b3953a68ce535df8e64d -->
+<!-- START_de61fa7fc602ee9f5114e170a8c04b37 -->
+<h2>todo: pagination?</h2>
+<p>Notice! Only standalone-permissions - messages</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/messages/get" \
+-H "Accept: application/json" \
+    -d "last_message_id"="2118765914" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/messages/get",
+    "method": "GET",
+    "data": {
+        "last_message_id": 2118765914
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/messages/get</code></p>
+<p><code>HEAD api/vk/messages/get</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>last_message_id</td>
+<td>integer</td>
+<td>optional</td>
+<td>Minimum: <code>0</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_de61fa7fc602ee9f5114e170a8c04b37 -->
+<!-- START_1a6b852dfef44fbe0f6d5d96f34650d8 -->
+<h2>Notice! Only standalone-permissions - messages</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/vk/messages/text" \
+-H "Accept: application/json" \
+    -d "user_id"="70960460" \
+    -d "message"="aperiam" \
+    -d "attachment"="aperiam" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/messages/text",
+    "method": "POST",
+    "data": {
+        "user_id": 70960460,
+        "message": "aperiam",
+        "attachment": "aperiam"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/vk/messages/text</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>required</td>
+<td>Minimum: <code>1</code> Maximum: <code>65000</code></td>
+</tr>
+<tr>
+<td>attachment</td>
+<td>string</td>
+<td>optional</td>
+<td>Minimum: <code>1</code> Maximum: <code>65000</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_1a6b852dfef44fbe0f6d5d96f34650d8 -->
+<!-- START_af7b5cb2eb9e03f7d9e9ce94bf151abb -->
+<h2>Notice! Only standalone-permissions - messages</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/messages/history" \
+-H "Accept: application/json" \
+    -d "user_id"="1563171598" \
+    -d "offset"="9774361" \
+    -d "count"="9774361" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/messages/history",
+    "method": "GET",
+    "data": {
+        "user_id": 1563171598,
+        "offset": 9774361,
+        "count": 9774361
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/messages/history</code></p>
+<p><code>HEAD api/vk/messages/history</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>offset</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>count</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_af7b5cb2eb9e03f7d9e9ce94bf151abb -->
+<!-- START_9b3d970b82ffe5b1555dbf83c6d3046e -->
+<h2>Notice! Only standalone-permissions - messages</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/messages/dialogs" \
+-H "Accept: application/json" \
+    -d "offset"="5" \
+    -d "count"="5" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/messages/dialogs",
+    "method": "GET",
+    "data": {
+        "offset": 5,
+        "count": 5
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/messages/dialogs</code></p>
+<p><code>HEAD api/vk/messages/dialogs</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>offset</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>count</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_9b3d970b82ffe5b1555dbf83c6d3046e -->
+<!-- START_822ad1cbf4d95cb820968f9c46235e75 -->
+<h2>api/vk/groups/getOneById</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/groups/getOneById" \
+-H "Accept: application/json" \
+    -d "group_ids"="velit" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/groups/getOneById",
+    "method": "GET",
+    "data": {
+        "group_ids": "velit"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/groups/getOneById</code></p>
+<p><code>HEAD api/vk/groups/getOneById</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>group_ids</td>
+<td>string</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_822ad1cbf4d95cb820968f9c46235e75 -->
+<!-- START_5006dc51cdc99a19b7014ebe0d49bfe3 -->
+<h2>api/vk/groups</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/groups" \
+-H "Accept: application/json" \
+    -d "user_id"="2105718355" \
+    -d "extended"="343063369" \
+    -d "fields"="voluptatibus" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/groups",
+    "method": "GET",
+    "data": {
+        "user_id": 2105718355,
+        "extended": 343063369,
+        "fields": "voluptatibus"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/groups</code></p>
+<p><code>HEAD api/vk/groups</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user_id</td>
+<td>integer</td>
+<td>optional</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>extended</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>string</td>
+<td>optional</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_5006dc51cdc99a19b7014ebe0d49bfe3 -->
+<!-- START_661bbdee7994c4de5e133e840487f079 -->
+<h2>api/vk/friends</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/friends" \
+-H "Accept: application/json" \
+    -d "user"="34686718" \
+    -d "fields"="et" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/friends",
+    "method": "GET",
+    "data": {
+        "user": 34686718,
+        "fields": "et"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/friends</code></p>
+<p><code>HEAD api/vk/friends</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_661bbdee7994c4de5e133e840487f079 -->
+<!-- START_30dc553120973e71cea92049086e68d9 -->
+<h2>api/vk/likes/to</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/vk/likes/to" \
+-H "Accept: application/json" \
+    -d "type"="nobis" \
+    -d "owner_id"="1466591977" \
+    -d "item_id"="1466591977" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/likes/to",
+    "method": "POST",
+    "data": {
+        "type": "nobis",
+        "owner_id": 1466591977,
+        "item_id": 1466591977
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/vk/likes/to</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>item_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_30dc553120973e71cea92049086e68d9 -->
+<!-- START_4cb1fff1c7202abd46414da357583581 -->
+<h2>api/vk/posts/one</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/posts/one" \
+-H "Accept: application/json" \
+    -d "owner_id"="et" \
+    -d "post_id"="et" \
+    -d "fields"="et" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts/one",
+    "method": "GET",
+    "data": {
+        "owner_id": "et",
+        "post_id": "et",
+        "fields": "et"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/posts/one</code></p>
+<p><code>HEAD api/vk/posts/one</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>string</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>post_id</td>
+<td>string</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>fields</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_4cb1fff1c7202abd46414da357583581 -->
+<!-- START_8e3320ff006437bba4793c54677581ec -->
+<h2>api/vk/posts</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/posts" \
+-H "Accept: application/json" \
+    -d "owner_id"="6" \
+    -d "offset"="6" \
+    -d "count"="6" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts",
+    "method": "GET",
+    "data": {
+        "owner_id": 6,
+        "offset": 6,
+        "count": 6
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/posts</code></p>
+<p><code>HEAD api/vk/posts</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>count</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_8e3320ff006437bba4793c54677581ec -->
+<!-- START_83e0755bd75e5e98063e0a296c479c39 -->
+<h2>api/vk/posts/create</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/vk/posts/create" \
+-H "Accept: application/json" \
+    -d "owner_id"="262394401" \
+    -d "message"="quia" \
+    -d "from_group"="77" \
+    -d "attachments"="quia" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts/create",
+    "method": "POST",
+    "data": {
+        "owner_id": 262394401,
+        "message": "quia",
+        "from_group": 77,
+        "attachments": "quia"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/vk/posts/create</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>required</td>
+<td>Maximum: <code>65000</code></td>
+</tr>
+<tr>
+<td>from_group</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>attachments</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_83e0755bd75e5e98063e0a296c479c39 -->
+<!-- START_23ba1a9d0b4f205b730c70d5b3b3f755 -->
+<h2>api/vk/posts/edit</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "http://localhost/api/vk/posts/edit" \
+-H "Accept: application/json" \
+    -d "owner_id"="919426477" \
+    -d "message"="molestiae" \
+    -d "post_id"="919426477" \
+    -d "attachments"="molestiae" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts/edit",
+    "method": "PUT",
+    "data": {
+        "owner_id": 919426477,
+        "message": "molestiae",
+        "post_id": 919426477,
+        "attachments": "molestiae"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/vk/posts/edit</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>required</td>
+<td>Maximum: <code>65000</code></td>
+</tr>
+<tr>
+<td>post_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>attachments</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_23ba1a9d0b4f205b730c70d5b3b3f755 -->
+<!-- START_46479f4dee59fb6340dff9e43af7b6f4 -->
+<h2>api/vk/posts/delete</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE "http://localhost/api/vk/posts/delete" \
+-H "Accept: application/json" \
+    -d "owner_id"="701009180" \
+    -d "post_id"="701009180" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts/delete",
+    "method": "DELETE",
+    "data": {
+        "owner_id": 701009180,
+        "post_id": 701009180
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/vk/posts/delete</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>post_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_46479f4dee59fb6340dff9e43af7b6f4 -->
+<!-- START_400ef8435311b9f3ba78dc66f258deb8 -->
+<h2>api/vk/posts/comments</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET "http://localhost/api/vk/posts/comments" \
+-H "Accept: application/json" \
+    -d "owner_id"="1710572406" \
+    -d "post_id"="1710572406" \
+    -d "offset"="83007384" \
+    -d "count"="83007384" \
+    -d "extended"="83007384" \
+    -d "fields"="quibusdam" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts/comments",
+    "method": "GET",
+    "data": {
+        "owner_id": 1710572406,
+        "post_id": 1710572406,
+        "offset": 83007384,
+        "count": 83007384,
+        "extended": 83007384,
+        "fields": "quibusdam"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<blockquote>
+<p>Example response:</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "You forgot VK ACCESS TOKEN"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/vk/posts/comments</code></p>
+<p><code>HEAD api/vk/posts/comments</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>post_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>offset</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>count</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>extended</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>fields</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_400ef8435311b9f3ba78dc66f258deb8 -->
+<!-- START_7386c404b1ee4f011aaf167acaf21cbd -->
+<h2>api/vk/posts/comments/create</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/vk/posts/comments/create" \
+-H "Accept: application/json" \
+    -d "owner_id"="168058665" \
+    -d "post_id"="168058665" \
+    -d "message"="beatae" \
+    -d "attachments"="beatae" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts/comments/create",
+    "method": "POST",
+    "data": {
+        "owner_id": 168058665,
+        "post_id": 168058665,
+        "message": "beatae",
+        "attachments": "beatae"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/vk/posts/comments/create</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>post_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>required</td>
+<td>Maximum: <code>65000</code></td>
+</tr>
+<tr>
+<td>attachments</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_7386c404b1ee4f011aaf167acaf21cbd -->
+<!-- START_32f6af47058eabc8bf7bf1b7c4cf2a7b -->
+<h2>api/vk/posts/comments</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X PUT "http://localhost/api/vk/posts/comments" \
+-H "Accept: application/json" \
+    -d "owner_id"="2001084415" \
+    -d "comment_id"="2001084415" \
+    -d "message"="recusandae" \
+    -d "attachments"="recusandae" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts/comments",
+    "method": "PUT",
+    "data": {
+        "owner_id": 2001084415,
+        "comment_id": 2001084415,
+        "message": "recusandae",
+        "attachments": "recusandae"
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>PUT api/vk/posts/comments</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>comment_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>required</td>
+<td>Maximum: <code>65000</code></td>
+</tr>
+<tr>
+<td>attachments</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
+<!-- END_32f6af47058eabc8bf7bf1b7c4cf2a7b -->
+<!-- START_632a6be274648082e106fdd3d5eef228 -->
+<h2>api/vk/posts/comments</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X DELETE "http://localhost/api/vk/posts/comments" \
+-H "Accept: application/json" \
+    -d "owner_id"="1072365317" \
+    -d "comment_id"="1072365317" \
+</code></pre>
+<pre><code class="language-javascript">var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "http://localhost/api/vk/posts/comments",
+    "method": "DELETE",
+    "data": {
+        "owner_id": 1072365317,
+        "comment_id": 1072365317
+},
+    "headers": {
+        "accept": "application/json"
+    }
+}
+
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});</code></pre>
+<h3>HTTP Request</h3>
+<p><code>DELETE api/vk/posts/comments</code></p>
+<h4>Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>owner_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+<tr>
+<td>comment_id</td>
+<td>integer</td>
+<td>required</td>
+<td>Minimum: <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<!-- END_632a6be274648082e106fdd3d5eef228 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

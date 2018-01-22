@@ -16,8 +16,8 @@ class InstagramAuthorize
      */
     public function handle($request, Closure $next)
     {
-    	$login = $request->header('INSTAGRAM_USERNAME');
-    	$password = $request->header('INSTAGRAM_PASSWORD');
+    	$login = $request->header('instagram-username');
+    	$password = $request->header('instagram-password');
     	try {
     		Instagram::getInstance()->login($login, $password);
 		    if (!Instagram::getInstance()->isLoggedIn) {

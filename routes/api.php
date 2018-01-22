@@ -27,6 +27,8 @@ Route::prefix('instagram')
 
 		Route::post('text', 'InstagramController@sendMessage');
 		Route::post('image', 'InstagramController@sendImage');
+		Route::get('threads', 'InstagramController@getThreads');
+		Route::get('history', 'InstagramController@getHistoryMessages');
 
 	});
 });

@@ -4,11 +4,19 @@ namespace App\Http\Controllers\API;
 
 use App\Defines\Fields;
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\InstagramDeleteCommentPost;
+use App\Http\Requests\InstagramGetCommentsPost;
+use App\Http\Requests\InstagramGetUserById;
+use App\Http\Requests\InstagramGetUserByUsername;
 use App\Http\Requests\InstagramSendDirectImage;
 use App\Http\Requests\InstagramSendDirectMessage;
+use App\Http\Requests\InstagramToBanUser;
 use App\Singletons\Instagram;
 use Illuminate\Http\Request;
+use InstagramAPI\Response\Model\Comment;
 use InstagramAPI\Response\Model\DirectThread;
+use InstagramAPI\Response\Model\DirectThreadItem;
+use InstagramAPI\Response\Model\User;
 
 class InstagramController extends AppBaseController
 {
@@ -110,45 +118,132 @@ class InstagramController extends AppBaseController
      * @param Request $request
      * @return mixed
      */
-    public function getHistoryMessages(Request $request)
+    public function getAllHistoryMessages(Request $request)
     {
-        $responseMessages = [];
-        $threads = Instagram::getInstance()->direct->getInbox()->inbox->getThreads();
-        foreach ($threads as $thread) {
-            $inbox = Instagram::getInstance()->direct->getThread($thread->getThreadId())->getThread();
-            $messages = $inbox->getItems();
-            dd($thread);
-            if (empty($messages)) {
-                continue;
-            }
-            $cursor = null;
+        try {
+            $responseMessages = [];
+            $threads = Instagram::getInstance()->direct->getInbox()->inbox->getThreads();
+            foreach ($threads as $thread) {
+                $inbox = Instagram::getInstance()->direct->getThread($thread->getThreadId())->getThread();
+                $messages = $inbox->getItems();
 
-            do {
                 if (empty($messages)) {
-                    break;
+                    continue;
                 }
-                foreach ($messages as $message) {
-                    $responseMessages[$message['user_id']][] = [
-                        'attachments' => $message['item_type'] == 'media' && !empty($message['media']) ? json_encode($message['media']) : '',
-                        'message' => $message['text'] ?? '',
-                        'time' => intval($message['timestamp'] / 1000000),
-                        'from' => $message['user_id'],
-                        'is_read' => 0,
-                        'is_client' => $message['user_id'] == Instagram::getInstance()->account_id ? 1 : 0,
-                    ];
-                }
-                // move cursor
-                $cursor = Instagram::getInstance()->direct->getThread($thread->getThreadId(), $cursor)->getThread()->getOldestCursor() ?? null;
-                if (empty($cursor)) {
-                    break;
-                }
-                // get next messages by cursor
-                $messages = Instagram::getInstance()->direct->getThread($thread->getThreadId(), $cursor)->getThread()->getItems() ?? null;
-                if (empty($messages)) {
-                    break;
-                }
-            } while (true);
+                $cursor = null;
+                do {
+                    /** @var DirectThreadItem $message */
+                    foreach ($messages as $message) {
+                        $responseMessages[$message->getUserId()][] = [
+                            'attachments' => $message->getItemType() == 'media' && !empty($message->getMedia()) ? json_encode($message->getMedia()) : '',
+                            'message' => $message->getText() ?? '',
+                            'time' => intval($message->getTimestamp() / 1000000),
+                            'from' => $message->getUserId(),
+                            'is_read' => 0,
+                            'is_client' => $message->getUserId() == Instagram::getInstance()->account_id ? 1 : 0,
+                        ];
+                    }
+                    // move cursor
+                    $cursor = Instagram::getInstance()->direct->getThread($thread->getThreadId(), $cursor)->getThread()->getOldestCursor() ?? null;
+                    if (empty($cursor)) {
+                        break;
+                    }
+                    // get next messages by cursor
+                    $messages = Instagram::getInstance()->direct->getThread($thread->getThreadId(), $cursor)->getThread()->getItems() ?? null;
+                    if (empty($messages)) {
+                        break;
+                    }
+                } while (true);
+            }
+            return $this->sendResponse($responseMessages, 'Messages are fetched successfully');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 400);
         }
-        return $this->sendResponse($responseMessages, 'Messages are fetched successfully');
+    }
+
+    public function getCommentsPost(InstagramGetCommentsPost $request)
+    {
+        try {
+            $commentsResponse = [];
+            $mediaId = Instagram::getMediaID($request->get('post_url'));
+            $comments = Instagram::getInstance()->media->getComments($mediaId)->getComments() ?? [];
+            /** @var Comment $comment */
+            foreach ($comments as $comment) {
+                $commentsResponse[] = [
+                    "message" => $comment->getText(),
+                    "from" => $comment->getUserId(),
+                    "time" => (int) $comment->getCreatedAtUtc(),
+                    "is_read" => "0",
+                    'is_client' => $comment->getUserId() == Instagram::getInstance()->account_id ? 1 : 0,
+                ];
+            }
+            return $this->sendResponse($commentsResponse, 'Comments are fetched successfully');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 400);
+        }
+    }
+
+    public function deleteCommentPost(InstagramDeleteCommentPost $request)
+    {
+        try {
+            $postId = Instagram::getMediaID($request->get('media_url'));
+            $commentIds = array_map(function($id) {
+                return trim($id);
+            }, explode(',', $request->get('comment_ids')));
+            $deletedCommentsResponse = Instagram::getInstance()->media->deleteComments($postId, $commentIds)->getStatus();
+            return $this->sendResponse('Status - ' . $deletedCommentsResponse, 'Comment is deleted successfully');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 400);
+        }
+    }
+
+    public function toBan(InstagramToBanUser $request)
+    {
+        try {
+            $response = Instagram::getInstance()->people->block($request->get('user_id'))->getStatus();
+            return $this->sendResponse('Status - ' . $response, 'User is banned successfully');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 400);
+        }
+    }
+
+    public function getUserById(InstagramGetUserById $request)
+    {
+        try {
+            /** @var User $user */
+            $user = Instagram::getInstance()->people->getInfoById($request->get('user_id'))->getUser();
+            return $this->sendResponse([
+                'id' => $user->getUserId(),
+                "domain" => $user->getUsername(),
+                "avatar" => $user->getProfilePicUrl(),
+                "name" => $user->getUsername(),
+                "city" => $user->getCityName(),
+                "phone" => $user->getPhoneNumber(),
+                "email" => $user->getEmail(),
+                "followers_count" => $user->getFollowerCount()
+            ], 'User is fetched successfully');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 400);
+        }
+    }
+
+    public function getByUserName(InstagramGetUserByUsername $request)
+    {
+        try {
+            /** @var User $user */
+            $user = Instagram::getInstance()->people->getInfoByName($request->get('username'))->getUser();
+            return $this->sendResponse([
+                'id' => $user->getUserId(),
+                "domain" => $user->getUsername(),
+                "avatar" => $user->getProfilePicUrl(),
+                "name" => $user->getUsername(),
+                "city" => $user->getCityName(),
+                "phone" => $user->getPhoneNumber(),
+                "email" => $user->getEmail(),
+                "followers_count" => $user->getFollowerCount()
+            ], 'User is fetched successfully');
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 400);
+        }
     }
 }

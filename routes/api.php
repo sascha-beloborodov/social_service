@@ -28,9 +28,24 @@ Route::prefix('instagram')
 		Route::post('text', 'InstagramController@sendMessage');
 		Route::post('image', 'InstagramController@sendImage');
 		Route::get('threads', 'InstagramController@getThreads');
-		Route::get('history', 'InstagramController@getHistoryMessages');
+		Route::get('history', 'InstagramController@getAllHistoryMessages');
 
 	});
+
+    Route::prefix('comments')->group(function () {
+
+        Route::get('post', 'InstagramController@getCommentsPost');
+        Route::delete('post', 'InstagramController@deleteCommentPost');
+
+    });
+
+    Route::prefix('users')->group(function () {
+
+        Route::post('toBan', 'InstagramController@toBan');
+        Route::get('getById', 'InstagramController@getUserById');
+        Route::get('getByUsername', 'InstagramController@getUserByUsername');
+
+    });
 });
 
 Route::prefix('vk')
